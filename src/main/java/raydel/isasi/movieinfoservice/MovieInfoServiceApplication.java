@@ -2,6 +2,8 @@ package raydel.isasi.movieinfoservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 public class MovieInfoServiceApplication {
@@ -10,4 +12,9 @@ public class MovieInfoServiceApplication {
 		SpringApplication.run(MovieInfoServiceApplication.class, args);
 	}
 
+	@Bean
+	RestTemplate restemplate() {
+
+		return new RestTemplate();
+	}
 }
