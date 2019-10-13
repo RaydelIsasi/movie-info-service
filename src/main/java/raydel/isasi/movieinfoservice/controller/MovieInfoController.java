@@ -33,7 +33,7 @@ public class MovieInfoController {
 
 		String originaltitle = response.get("original_title").toString();
 
-		return new Movie(movieid, description, originaltitle);
+		return new Movie(movieid, originaltitle, description);
 
 	}
 }
