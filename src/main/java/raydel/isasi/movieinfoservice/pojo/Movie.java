@@ -20,6 +20,10 @@ public class Movie {
 		this.description = description;
 	}
 
+	public Movie() {
+
+	}
+
 	public int getMovieId() {
 		return MovieId;
 	}
