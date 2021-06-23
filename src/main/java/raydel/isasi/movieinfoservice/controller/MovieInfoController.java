@@ -29,7 +29,7 @@ public class MovieInfoController {
     String baseUrl;
 
 
-    @RequestMapping("/{movieId}")
+    @PostMapping("/{movieId}")
     public Object getMovieInfo(@PathVariable("movieId") int movieid) {
         Map<String, Object> response = resttemplate
                 .getForObject(baseUrl + "movie/" + movieid + "?api_key=" + apikey, Map.class);
@@ -40,7 +40,7 @@ public class MovieInfoController {
 
     }
 
-    @RequestMapping("/language/list/{listId}")
+    @PostMapping("/language/list/{listId}")
     public List<Movie> getMoviesByLanguage(@PathVariable("listId") int listId, @RequestBody RequestMovieService request) {
         Map<String, Object> response = resttemplate
                 .getForObject(baseUrl + "list/" + listId + "?api_key=" + apikey, Map.class);
@@ -58,7 +58,7 @@ public class MovieInfoController {
     }
 
 
-    @RequestMapping("/popularity/list/{listId}")
+    @PostMapping("/popularity/list/{listId}")
     public List<Movie> getMoviesByPopularity(@PathVariable("listId") int listId, @RequestBody RequestMovieService request) {
         Map<String, Object> response = resttemplate
                 .getForObject(baseUrl + "list/" + listId + "?api_key=" + apikey, Map.class);
