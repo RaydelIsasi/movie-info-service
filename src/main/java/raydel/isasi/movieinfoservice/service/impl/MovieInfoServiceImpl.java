@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import raydel.isasi.movieinfoservice.client.ClientRequestor;
 import raydel.isasi.movieinfoservice.pojo.Movie;
 import raydel.isasi.movieinfoservice.service.MovieInfoService;
 
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 public class MovieInfoServiceImpl implements MovieInfoService {
 
     @Autowired
-    RestTemplate resttemplate;
+    ClientRequestor clientRequestor;
     @Value("${api.key}")
     String apikey;
 
@@ -24,8 +25,7 @@ public class MovieInfoServiceImpl implements MovieInfoService {
 
     @Override
     public Movie getMovieInfo(int movieId) {
-        Map<String, Object> response = resttemplate
-                .getForObject(baseUrl + "movie/" + movieId + "?api_key=" + apikey, Map.class);
+        Map<String, Object> response = clientRequestor.executeRequest(baseUrl + "movie/" + movieId + "?api_key=" + apikey);
 
 
         return new Movie(movieId, String.valueOf(response.get("overview")), String.valueOf(response.get("original_title")));
@@ -35,8 +35,7 @@ public class MovieInfoServiceImpl implements MovieInfoService {
 
     @Override
     public List<Movie> getMoviesByLanguage(int listId, String language) {
-        Map<String, Object> response = resttemplate
-                .getForObject(baseUrl + "list/" + listId + "?api_key=" + apikey, Map.class);
+        Map<String, Object> response = clientRequestor.executeRequest(baseUrl + "list/" + listId + "?api_key=" + apikey);
 
 
         List<Map> movies = (List<Map>) response.get("items");
@@ -51,8 +50,7 @@ public class MovieInfoServiceImpl implements MovieInfoService {
 
     @Override
     public List<Movie> getMoviesByPopularity(int listId, double popularity) {
-        Map<String, Object> response = resttemplate
-                .getForObject(baseUrl + "list/" + listId + "?api_key=" + apikey, Map.class);
+        Map<String, Object> response = clientRequestor.executeRequest(baseUrl + "list/" + listId + "?api_key=" + apikey);
 
 
         List<Map> movies = (List<Map>) response.get("items");
